@@ -1,0 +1,55 @@
+﻿@model List<WebApplication.Models.ProductModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>CategoryId</th>
+        <th>Image</th>
+        <th></th>
+
+    </tr>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        <td>
+            @if (item.ImagePath != null)
+            {
+                <img src="~/Content/Images/@item.ImagePath" alt="Sample Image" height="150px" width="150px" />
+            }
+            else
+            {
+                @Html.Raw("No Images");
+            }
+
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id },
+            new { onclick = "return confirm('Are sure wants to delete?');" })
+        </td>
+        
+
+    </tr>
+}
+
+</table>
